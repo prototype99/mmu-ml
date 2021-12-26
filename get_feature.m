@@ -26,5 +26,7 @@ function f = get_feature(x, im, words)
             'UseSignedOrientation', true);
         case 5
             f = words.encode(im);
+        case 6
+            f = 0;
     end
 end

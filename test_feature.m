@@ -50,6 +50,18 @@ function a = test_feature(x)
         else
             words = 0;
         end
+        % test resnet50 on a sample image
+        if x == 6
+            % set the requested neural network
+            net = resnet50;
+            % retrieve the first test image
+            im = imdsTest.read();
+            % make sure later uses still use all images
+            imdsTest.reset;
+            inputSize = net.Layers(1).InputSize;
+            im = imresize(im,inputSize(1:2));
+            label = classify(net,im)
+        end
         % populate arrays, feature is extracted from greyscale image
         while hasdata(imdsTrain)
             trainData(end+1,:) = get_feature(x, im2gray(imdsTrain.read()), words);
