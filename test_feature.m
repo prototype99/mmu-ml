@@ -44,7 +44,7 @@ function a = test_feature(x)
         % initialise arrays
         trainData = [];
         testData = [];
-        % one feature needs words
+        % one feature needs words, the rest not so much
         if x == 5
             words = bagOfFeatures(imdsTrain);
         else
