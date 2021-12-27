@@ -50,30 +50,32 @@ function a = test_feature(x)
         label = classify(net,imresize(im,net.Layers(1).InputSize(1:2)))
     end
     % prepare the data
-    if x == 1
-        % strip the categories
-        trainData(:,2) = [];
-        testData(:,2) = [];
-        % convert to matrices
-        trainData = cell2mat(trainData(:,:));
-        testData = cell2mat(testData(:,:));
-    else
-        % initialise arrays
-        trainData = [];
-        testData = [];
-        % one feature needs words, the rest not so much
-        if x == 5
-            words = bagOfFeatures(imdsTrain);
-        else
-            words = 0;
-        end
-        % populate arrays, feature is extracted from greyscale image
-        while hasdata(imdsTrain)
-            trainData(end+1,:) = get_feature(x, im2gray(imdsTrain.read()), words);
-        end
-        while hasdata(imdsTest)
-            testData(end+1,:) = get_feature(x, im2gray(imdsTest.read()), words);
-        end
+    switch x
+        case 1
+            % strip the categories
+            trainData(:,2) = [];
+            testData(:,2) = [];
+            % convert to matrices
+            trainData = cell2mat(trainData(:,:));
+            testData = cell2mat(testData(:,:));
+        case 6
+        otherwise
+            % initialise arrays
+            trainData = [];
+            testData = [];
+            % one feature needs words, the rest not so much
+            if x == 5
+                words = bagOfFeatures(imdsTrain);
+            else
+                words = 0;
+            end
+            % populate arrays, feature is extracted from greyscale image
+            while hasdata(imdsTrain)
+                trainData(end+1,:) = get_feature(x, im2gray(imdsTrain.read()), words);
+            end
+            while hasdata(imdsTest)
+                testData(end+1,:) = get_feature(x, im2gray(imdsTest.read()), words);
+            end
     end
     % train the model
     model = fitcknn(trainData,trainCat,"NumNeighbors",3);
