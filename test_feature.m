@@ -37,6 +37,18 @@ function a = test_feature(x)
         trainCat = imdsTrain.Labels;
         testCat = imdsTest.Labels;
     end
+    % test resnet50 on a sample image
+    if x == 6
+        % set the requested neural network
+        net = resnet50;
+        % retrieve the first test image
+        im = imdsTest.read();
+        % make sure later uses still use all images
+        imdsTest.reset;
+        % get the classification result using an image resized to meet
+        % the size requirement
+        label = classify(net,imresize(im,net.Layers(1).InputSize(1:2)))
+    end
     % prepare the data
     if x == 1
         % strip the categories
@@ -54,18 +66,6 @@ function a = test_feature(x)
             words = bagOfFeatures(imdsTrain);
         else
             words = 0;
-        end
-        % test resnet50 on a sample image
-        if x == 6
-            % set the requested neural network
-            net = resnet50;
-            % retrieve the first test image
-            im = imdsTest.read();
-            % make sure later uses still use all images
-            imdsTest.reset;
-            % get the classifiction result using an image resized to meet
-            % the size requirement
-            label = classify(net,imresize(im,net.Layers(1).InputSize(1:2)))
         end
         % populate arrays, feature is extracted from greyscale image
         while hasdata(imdsTrain)
