@@ -14,15 +14,20 @@ function a = test_feature(x)
         'IncludeSubfolders', true, ...
         'LabelSource', 'foldernames');
     end
-    % create a 2:3 split of test:train randomised data
-    if x == 1
-        data(1,:) = []; % remove the headers
-        data = data(randperm(size(data,1)),:);
-        testSize = round(0.4 * size(data,1));
-        testData = data(1:testSize,:);
-        trainData = data(testSize+1:end,:);
-    else
-        [imdsTrain, imdsTest] = splitEachLabel(data, 0.6, 'randomize');
+    % create a split of test:train randomised data per classification
+    % category, typically 2:3
+    switch x
+        case 1
+            data(1,:) = []; % remove the headers
+            data = data(randperm(size(data,1)),:);
+            testSize = round(0.4 * size(data,1));
+            testData = data(1:testSize,:);
+            trainData = data(testSize+1:end,:);
+        case 6
+            % use a 7:3 split, as recommended by mathworks
+            [imdsTrain, imdsTest] = splitEachLabel(data, 0.3, 'randomize');
+        otherwise
+            [imdsTrain, imdsTest] = splitEachLabel(data, 0.6, 'randomize');
     end
     % gather the labels
     if x == 1
