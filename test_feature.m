@@ -58,9 +58,7 @@ function a = test_feature(x)
             im = imdsTest.read();
             % make sure later uses still use all images
             imdsTest.reset;
-            inputSize = net.Layers(1).InputSize;
-            im = imresize(im,inputSize(1:2));
-            label = classify(net,im)
+            label = classify(net,imresize(im,net.Layers(1).InputSize(1:2)))
         end
         % populate arrays, feature is extracted from greyscale image
         while hasdata(imdsTrain)
