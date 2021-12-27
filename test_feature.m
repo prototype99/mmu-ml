@@ -45,9 +45,11 @@ function a = test_feature(x)
         im = imdsTest.read();
         % make sure later uses still use all images
         imdsTest.reset;
+        % store the required size 
+        imSize = net.Layers(1).InputSize; 
         % get the classification result using an image resized to meet
         % the size requirement
-        label = classify(net,imresize(im,net.Layers(1).InputSize(1:2)))
+        label = classify(net,imresize(im,imSize(1:2)))
     end
     % prepare the data
     switch x
@@ -59,6 +61,16 @@ function a = test_feature(x)
             trainData = cell2mat(trainData(:,:));
             testData = cell2mat(testData(:,:));
         case 6
+            % resize the images to mkae them compatible 
+            imdsTrain = augmentedImageDatastore(imSize, imdsTrain);
+            imdsTest = augmentedImageDatastore(imSize, imdsTest);
+            % set feature layer
+            featureLayer = 'fc1000';
+            % collect high level features
+            trainData = activations(net, imdsTrain, featureLayer, ...
+            'MiniBatchSize', 32, 'OutputAs', 'rows');
+            testData = activations(net, imdsTest, featureLayer, ...
+            'MiniBatchSize', 32, 'OutputAs', 'rows');
         otherwise
             % initialise arrays
             trainData = [];
