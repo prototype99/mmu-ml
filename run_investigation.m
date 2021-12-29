@@ -49,7 +49,8 @@ function run_investigation(x)
         % the size requirement
         label = classify(net,imresize(im,imSize(1:2)));
         % report classification result
-        disp(['resnet50 classifies this image as: ',label])
+        disp(['Resnet50 classifies this image as: ',label])
+        disp('Investigation using high level features in progress...')
     end
     % prepare the data
     switch x
