@@ -11,5 +11,5 @@ function test_feature(testCat, testData, trainCat, trainData)
     % create a percentage accuracy to allow easy comparison
     a = 100 * (sum(diag(results)) / sum(results(:)));
     % declare the accuracy
-    disp('The accuracy is: ' + a + '%')
+    disp(['The accuracy is: ',num2str(a),'%'])
 end
