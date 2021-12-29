@@ -104,5 +104,36 @@ function run_investigation(x)
         disp('Investigation using low level features in progress...')
         % compute the accuracy
         test_feature(testCat, testData, trainCat, trainData)
+        % create a graph of the network
+        lgraph = layerGraph(net);
+        % find layers we need in order to retrain
+        [learnableLayer,classLayer] = findLayersToReplace(lgraph);
+        % count classes
+        numClasses = numel(categories(trainCat));
+        % make a new learning layer
+        newLearnableLayer = fullyConnectedLayer(numClasses, ...
+            'Name','new_fc', ...
+            'WeightLearnRateFactor',10, ...
+            'BiasLearnRateFactor',10);
+        % replace with the new layer
+        lgraph = replaceLayer(lgraph,learnableLayer.Name,newLearnableLayer);
+        % swap the class layer with an empty one, this will be populated
+        % during training
+        newClassLayer = classificationLayer('Name','new_classoutput');
+        lgraph = replaceLayer(lgraph,classLayer.Name,newClassLayer);
+        % define training options
+        miniBatchSize = 10;
+        valFrequency = floor(numel(imdsTrain.Files)/miniBatchSize);
+        options = trainingOptions('sgdm', ...
+            'MiniBatchSize',miniBatchSize, ...
+            'MaxEpochs',6, ...
+            'InitialLearnRate',3e-4, ...
+            'Shuffle','every-epoch', ...
+            'ValidationData',imdsTest, ...
+            'ValidationFrequency',valFrequency, ...
+            'Verbose',false, ...
+            'Plots','training-progress');
+        % retrain the network
+        net = trainNetwork(imdsTrain,lgraph,options);
     end
 end
