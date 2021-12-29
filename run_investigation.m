@@ -50,7 +50,6 @@ function run_investigation(x)
         label = classify(net,imresize(im,imSize(1:2)));
         % report classification result
         disp(['Resnet50 classifies this image as: ',label])
-        disp('Investigation using high level features in progress...')
     end
     % prepare the data
     switch x
@@ -72,6 +71,7 @@ function run_investigation(x)
             'MiniBatchSize', 32, 'OutputAs', 'rows');
             testData = activations(net, imdsTest, featureLayer, ...
             'MiniBatchSize', 32, 'OutputAs', 'rows');
+            disp('Investigation using high level features in progress...')
         otherwise
             % initialise arrays
             trainData = [];
