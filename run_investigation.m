@@ -92,4 +92,17 @@ function run_investigation(x)
     end
     % compute an accuracy rating for a feature
     test_feature(testCat, testData, trainCat, trainData)
+    % this investigation tests multiple kinds of feature
+    if x == 6
+        % set feature layer
+        featureLayer = 'input_1';
+        % collect high level features
+        trainData = activations(net, imdsTrain, featureLayer, ...
+        'MiniBatchSize', 32, 'OutputAs', 'rows');
+        testData = activations(net, imdsTest, featureLayer, ...
+        'MiniBatchSize', 32, 'OutputAs', 'rows');
+        disp('Investigation using low level features in progress...')
+        % compute the accuracy
+        test_feature(testCat, testData, trainCat, trainData)
+    end
 end
