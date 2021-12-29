@@ -47,7 +47,9 @@ function run_investigation(x)
         imSize = net.Layers(1).InputSize; 
         % get the classification result using an image resized to meet
         % the size requirement
-        label = classify(net,imresize(im,imSize(1:2)))
+        label = classify(net,imresize(im,imSize(1:2)));
+        % report classification result
+        disp(['resnet50 classifies this image as: ',label])
     end
     % prepare the data
     switch x
