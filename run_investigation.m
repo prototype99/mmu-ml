@@ -134,6 +134,6 @@ function run_investigation(x)
             'Verbose',false, ...
             'Plots','training-progress');
         % retrain the network
-        net = trainNetwork(imdsTrain,lgraph,options);
+        trainNetwork(imdsTrain,lgraph,options);
     end
 end
