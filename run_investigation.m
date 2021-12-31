@@ -1,7 +1,8 @@
 % Description: run an investigation on a feature
 %
-% Inputs: x: the feature number, matches up to the header
-function run_investigation(x)
+% Inputs: x: the feature number, matches up to the header, y: variable to
+% determine which functions to use: 0 - bundled, 1 - custom
+function run_investigation(x,y)
     % re-seed the random number for reproducible results
     rng(0);
     % read the file's data and store it in memory
@@ -91,7 +92,7 @@ function run_investigation(x)
             end
     end
     % compute an accuracy rating for a feature
-    test_feature(testCat, testData, trainCat, trainData)
+    test_feature(testCat, testData, trainCat, trainData,y)
     % this investigation tests multiple kinds of feature
     if x == 6
         % set feature layer
@@ -103,7 +104,7 @@ function run_investigation(x)
         'MiniBatchSize', 32, 'OutputAs', 'rows');
         disp('Investigation using low level features in progress...')
         % compute the accuracy
-        test_feature(testCat, testData, trainCat, trainData)
+        test_feature(testCat, testData, trainCat, trainData,y)
         % create a graph of the network
         lgraph = layerGraph(net);
         % find layers we need in order to retrain

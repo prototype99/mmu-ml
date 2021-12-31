@@ -1,9 +1,13 @@
 % Description: test a feature for the investigation and output the accuracy
 %
-% Inputs: testCat, testData, trainCat, trainData
-function test_feature(testCat, testData, trainCat, trainData)
+% Inputs: testCat, testData, trainCat, trainData,y (see run_investigation())
+function test_feature(testCat, testData, trainCat, trainData,y)
     % train the model
-    model = fitcknn(trainData,trainCat,"NumNeighbors",3);
+    if y == 0
+        model = fitcknn(trainData,trainCat,"NumNeighbors",3);
+    else
+        model = knn_fit(trainData,trainCat);
+    end
     % use the model to predict what label each row of data will have
     predictions = predict(model, testData);
     % create a confusion matrix to aid in performance evaluation
