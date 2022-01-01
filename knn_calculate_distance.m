@@ -1,3 +1,4 @@
+% TODO: add validation?
 % Description: calculate the Euclidean distance between any two
 % points
 %
@@ -8,14 +9,8 @@
 % Outputs:
 % d: a numeric value holding the straight-line distance
 % between the two points
-% 
-% Notes: you can find the equation for Euclidean distance in the
-% lecture slides.
 function d = knn_calculate_distance(p, q)
-    % subtract the feature values in p from the corresponding feature
-    % values in q
-    d =  p - q;
-    % square each of the resulting differences and sum them then compute
-    % the square root
-    d = sqrt(sum(d * d));
+    % square (this helps remove negative values) each of the differences and sum them then compute
+    % the square root to get the unsquared value
+    d = sqrt(sum((p-q) .^ 2));
 end

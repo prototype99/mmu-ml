@@ -9,7 +9,11 @@ function test_feature(testCat, testData, trainCat, trainData,y)
         model = knn_fit(trainData,trainCat);
     end
     % use the model to predict what label each row of data will have
-    predictions = predict(model, testData);
+    if y == 0
+        predictions = predict(model, testData);
+    else
+        predictions = knn_predict(model, testData);
+    end
     % create a confusion matrix to aid in performance evaluation
     [results,~] = confusionmat(testCat, predictions);
     % create a percentage accuracy to allow easy comparison

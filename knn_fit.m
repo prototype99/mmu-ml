@@ -11,7 +11,7 @@
 % m: a struct holding the parameters of the k-NN model (the
 % training examples, the training labels, and a value for k - the number of
 % nearest neighbours to use)
-function m = knn_fit(train_examples, train_labels)
+function m = knn_fit(trainData, trainCat)
     % store the values in a simple struct. Always use 3 as requested
-    m = struct('train_examples', train_examples, 'train_labels', train_labels, 'k', 3);
+    m = struct('trainData', trainData, 'trainCat', trainCat, 'k', 3);
 end
