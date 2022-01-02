@@ -1,3 +1,7 @@
+% TODO: explore ways to reduce variance compared to bundled version, I
+% believe a lot of the variance is due to differences in how the mode
+% function is performed and how closeness is determined once the euclidean
+% distance is not enough 
 % Description: use an existing k-NN model to classify some testing examples 
 %
 % Inputs:
@@ -32,8 +36,10 @@ function predictions = knn_predict(m, testData)
                         % ensure the smallest value is stored, because the
                         % largest value is always replaced, it can be
                         % determined that the 3 stored values are the
-                        % smallest without any complex comparison
-                        if dists(d,1) == max(dists(:,1)) && distNew < min(dists(:,1))
+                        % smallest without any complex comparison. Weirdly
+                        % enough, using less than or equal to results in
+                        % less variance compared to the bundled version.
+                        if dists(d,1) == max(dists(:,1)) && distNew <= min(dists(:,1))
                             % store the new value
                             dists(d,1) = distNew;
                             % store the new location
