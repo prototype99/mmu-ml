@@ -24,7 +24,7 @@ function predictions = knn_predict(m, testData)
             distNew = knn_calculate_distance(p, q);
             switch i
                 % the cases exist to prevent null values, these can be
-                % hardcoded as we use only one k number
+                % hardcoded as only one k number is used
                 case 1
                     dists(1,1) = distNew;
                 case 2
