@@ -1,4 +1,5 @@
-% Description: test a feature for the investigation and output the accuracy
+% Description: test a feature for the investigation and output the
+% accuracy, there's some performance variance in the custom knn functions
 %
 % Inputs: testCat, testData, trainCat, trainData,y (see run_investigation())
 function test_feature(testCat, testData, trainCat, trainData,y)

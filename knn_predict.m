@@ -34,6 +34,7 @@ function predictions = knn_predict(m, testData)
     % loop over the data, it must be transposed to loop over it
     for p = testData.'
         i = 1;
+        % build the general array structure, ready to use
         dists = [0,1;0,2;0,3];
         for q = m.trainData.'
             distNew = knn_calculate_distance(p, q);
@@ -64,7 +65,8 @@ function predictions = knn_predict(m, testData)
             % compared
             i = i + 1;
         end
+        % fill the predictions array. because k is 3, the mode is taken out
+        % of the 3 most similar values
+        predictions(end+1,:) = mode([m.trainCat(dists(1,2)),m.trainCat(dists(2,2)),m.trainCat(dists(3,2))]);
     end
-    prediction = 1;
-    predictions(end+1,:) = prediction;
 end
