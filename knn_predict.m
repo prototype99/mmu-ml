@@ -9,27 +9,7 @@
 % Outputs:
 % predictions: a categorical array containing the predicted
 % labels (i.e., with the same ordering as test_examples)
-%
-% Notes:
-% Assumes that the model m has been created with a call to knn_fit()
 function predictions = knn_predict(m, testData)
-    % Guidance (first task):
-    % 1. initialise an empty categorical array to hold the predictions
-    % 2. loop over every example in the testing_examples array
-    % and... 
-    %   a. find its nearest neighbour in the data inside the
-    %   model
-    %   b. take the label associated with that nearest neighbour as
-    %   your prediction
-    %   c. add the new prediction onto the end of your categorical
-    %   array (from step 1)
-    
-    % Guidance (second task):
-    % adjust your code to take account of the k value set inside the model
-    % m. Adjust step a from above so that all k nearest neighbours are
-    % found. Adjust step b from above to take the the most common class
-    % label across all k nearest neighbours as your prediction
-
     predictions = categorical;
     % loop over the data, it must be transposed to loop over it
     for p = testData.'
