@@ -5,6 +5,8 @@
 % 
 % Outputs: f: the extracted feature
 function f = get_feature(x, im, words)
+    % make image greyscale to simplify processing complexity
+    im = im2gray(im);
     switch x
         case 2
             % calculate average brightness of whole image
