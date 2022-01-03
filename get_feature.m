@@ -1,12 +1,16 @@
 % Description: prepare data based on which investigation is taking place
 %
-% Inputs: x: the feature number, im: an image, words: bag of visual words,
+% Inputs: x: the feature number, y: see run_investigation, im: an image, words: bag of visual words,
 % optional
 % 
 % Outputs: f: the extracted feature
-function f = get_feature(x, im, words)
+function f = get_feature(x, y, im, words)
     % make image greyscale to simplify processing complexity
-    im = im2gray(im);
+    if y == 0
+        im = im2gray(im);
+    else
+        im = my_im2gray(im);
+    end
     switch x
         case 2
             % calculate average brightness of whole image

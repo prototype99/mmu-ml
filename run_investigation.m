@@ -85,10 +85,10 @@ function run_investigation(x,y)
             end
             % populate arrays, feature is extracted from greyscale image
             while hasdata(imdsTrain)
-                trainData(end+1,:) = get_feature(x, imdsTrain.read(), words);
+                trainData(end+1,:) = get_feature(x, y, imdsTrain.read(), words);
             end
             while hasdata(imdsTest)
-                testData(end+1,:) = get_feature(x, imdsTest.read(), words);
+                testData(end+1,:) = get_feature(x, y, imdsTest.read(), words);
             end
     end
     % compute an accuracy rating for a feature
