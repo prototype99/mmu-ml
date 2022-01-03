@@ -11,8 +11,9 @@ function im_g = my_im2gray(im)
     for i = 1:size(im, 1)
         for j = 1:size(im, 2)
             % store the pixel converted to greyscale, then cast it to the
-            % required data type (which also solves rounding)
-            im_g(i,j,:) = cast(sum([im(i,j,1),im(i,j,2),im(i,j,3)])/4,'uint8');
+            % required data type (which also solves rounding). Use the
+            % official matlab weightings to achieve an identical result
+            im_g(i,j,:) = cast(sum([0.2989*im(i,j,1),0.587*im(i,j,2),0.114*im(i,j,3)]),'uint8');
         end
     end
 end
