@@ -1,4 +1,8 @@
-% TODO: what if the image already is greyscale?
+% TODO: what if the image already is greyscale? there's also a bit of
+% variance introduced by this function, but I mean... it looks identical to
+% the image produced by the official function? I don't think it's
+% important. It also feels a bit slower, but that's definitely not a
+% priority
 % Description: convert a given image to greyscale
 %
 % Inputs:
