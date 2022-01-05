@@ -20,8 +20,6 @@ function [Gx, Gy] = my_imgradientxy(im)
     im = im';
     im = padarray(im,1,"replicate");
     % im is left transposed because of how for loops work
-    xfilter = [ -1  0  1; -1  0  1; -1  0  1 ];
-    Gx = im;
-    yfilter = [ -1 -1 -1; 0  0  0; 1  1  1];
-    Gy = im;
+    Gx = convolve(im,[ -1  0  1; -1  0  1; -1  0  1 ]);
+    Gy = convolve(im,[ -1 -1 -1; 0  0  0; 1  1  1]);
 end
