@@ -1,4 +1,4 @@
-% Description: generte image gradients using the prewitt method
+% Description: generate image gradients using the prewitt method
 %
 % Inputs: im: an image
 % 
