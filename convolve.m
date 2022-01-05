@@ -1,4 +1,5 @@
-% Description: apply a 3x3 filter to a padded image
+% Description: apply a 3x3 filter to a padded image that has been
+% transposed
 %
 % Inputs: im: an image, f: a filter
 % 
