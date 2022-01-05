@@ -5,5 +5,9 @@
 % 
 % Outputs: c: a convoluted image
 function c = convolve(im,f)
-    
+    for x = im
+        for y = im
+        end
+    end
+    c = f;
 end
