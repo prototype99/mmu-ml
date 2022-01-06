@@ -23,6 +23,7 @@ function c = convolve(im,f)
                 for ix = 1:size(im,2)-1
                 end
             end
+            % store the final convoluted value
             c(j-1,i-1) = im(i,j);
             j = j + 1;
         end
