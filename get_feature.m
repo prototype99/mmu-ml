@@ -17,7 +17,11 @@ function f = get_feature(x, y, im, words)
             f = sum(im(1:1:end)) / (size(im, 1) * size(im, 2) * size(im, 3));
         case 3
             % generate gradients from the image using the prewitt method
-            [Gx, Gy] = imgradientxy(im, 'Prewitt');
+            if y == 0
+                [Gx, Gy] = imgradientxy(im, 'Prewitt');
+            else
+                [Gx, Gy] = my_imgradientxy(im);
+            end
             % apply thresholds to generated magnitudes in order to detect clear
             % edges
             Gx = abs(Gx)>=45;
