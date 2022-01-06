@@ -19,8 +19,8 @@ function c = convolve(im,f)
             yrel = [1,0,-1;1,0,-1;1,0,-1];
             % csum contains all filtered pixels
             csum = 0;
-            for iy = 1:size(im,1)-1
-                for ix = 1:size(im,2)-1
+            for iy = 1:3
+                for ix = 1:3
                     csum = csum + im(i+xrel(ix,iy),j+yrel(ix,iy));
                 end
             end
