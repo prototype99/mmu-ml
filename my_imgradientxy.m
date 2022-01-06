@@ -14,6 +14,8 @@
 % should add padding around the image (by copying the closest pixel
 % values)
 function [Gx, Gy] = my_imgradientxy(im)
+    % make sure image is a signed int
+    im = cast(im,'int8');
     % pad the image. is there an easier way? probably? i'll get back to you
     % on that when i have a positive iq
     im = padarray(im,1,"replicate");
