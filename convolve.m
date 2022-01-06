@@ -21,10 +21,11 @@ function c = convolve(im,f)
             csum = 0;
             for iy = 1:size(im,1)-1
                 for ix = 1:size(im,2)-1
+                    csum = csum + im(i+xrel(ix,iy),j+yrel(ix,iy));
                 end
             end
             % store the final convoluted value
-            c(j-1,i-1) = im(i,j);
+            c(j-1,i-1) = csum;
             j = j + 1;
         end
         i = i + 1;
