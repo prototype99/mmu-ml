@@ -22,7 +22,12 @@ function c = convolve(im,f)
             % search through a 9 pixel area
             for iy = 1:3
                 for ix = 1:3
-                    csum = csum + im(i+xrel(ix,iy),j+yrel(ix,iy));
+                    % only count pixels that are included in the filter
+                    fval = f(ix,iy);
+                    if fval ~= 0
+                        % add filtered pixel to sum
+                        csum = csum + im(i+xrel(ix,iy),j+yrel(ix,iy)) * fval;
+                    end
                 end
             end
             % store the final convoluted value
