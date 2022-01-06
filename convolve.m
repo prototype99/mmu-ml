@@ -19,6 +19,7 @@ function c = convolve(im,f)
             yrel = [1,0,-1;1,0,-1;1,0,-1];
             % csum contains all filtered pixels
             csum = 0;
+            % search through a 9 pixel area
             for iy = 1:3
                 for ix = 1:3
                     csum = csum + im(i+xrel(ix,iy),j+yrel(ix,iy));
