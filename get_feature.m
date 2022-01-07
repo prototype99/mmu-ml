@@ -30,10 +30,14 @@ function f = get_feature(x, y, im, words)
             % edges
             f = [(sum(sum(Gx)) / (size(Gx, 1) * size(Gx, 2))) (sum(sum(Gy)) / (size(Gy, 1) * size(Gy, 2)))];
         case 4
-            % extract hog features using typical settings
-            f = extractHOGFeatures(im, 'CellSize', [16 16], ...
-            'BlockSize', [floor(size(im,1)/16) floor(size(im,2)/16)], ...
-            'UseSignedOrientation', true);
+            if y == 0
+                % extract hog features using typical settings
+                f = extractHOGFeatures(im, 'CellSize', [16 16], ...
+                'BlockSize', [floor(size(im,1)/16) floor(size(im,2)/16)], ...
+                'UseSignedOrientation', true);
+            else
+                f = my_extractHOGFeatures(im);
+            end
         case 5
             f = words.encode(im);
     end
