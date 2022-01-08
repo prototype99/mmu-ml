@@ -32,8 +32,32 @@
 % have the distance you simply divide all values in your h array by it (the
 % new distance from the origin is then equal to 1)
 function h = my_extractHOGFeatures(im)
+    xsize = size(im,1);
+    ysize = size(im,2);
+    % check for excess pixels
+    xcess = mod(xsize,16);
+    ycess = mod(ysize,16);
+    % check for excess pixels
+    if xcess > 0 || ycess > 0
+        % resize the image so that it fits a 16x16 grid
+        im = imresize(im,[xsize-xcess,ysize-ycess]);
+    end
+    % find the tile starting points
+    for y = 1:16:size(im, 1)
+        for x = 1:16:size(im, 2)
+            % initialise tile
+            itile = [];
+            % construct an image tile
+            for iy = 1:16
+                for ix = 1:16
+                    itile(ix,iy) = im(x+ix-1,y+iy-1);
+                end
+            end
+        end
+    end
+    % 40
     % generate magnitudes and directions
-    [Gmag, Gdir] = imgradient(Gx, Gy);
+    %[Gmag, Gdir] = imgradient(Gx, Gy);
     % normalise? unit l2 norm. normalise a whole block
     % sqrt( sum( h .^ 2 ) )
     h = [];
