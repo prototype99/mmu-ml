@@ -53,11 +53,13 @@ function h = my_extractHOGFeatures(im)
                     itile(ix,iy) = im(x+ix-1,y+iy-1);
                 end
             end
+            % collect gradients using the prewitt method
+            [Gx, Gy] = my_imgradientxy(itile);
+            % generate magnitudes and angles
+            [Gmag, Gdir] = imgradient(Gx, Gy);
         end
     end
     % 40
-    % generate magnitudes and directions
-    %[Gmag, Gdir] = imgradient(Gx, Gy);
     % normalise? unit l2 norm. normalise a whole block
     % sqrt( sum( h .^ 2 ) )
     h = [];
