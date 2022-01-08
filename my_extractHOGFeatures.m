@@ -45,7 +45,7 @@ function h = my_extractHOGFeatures(im)
     % find the tile starting points
     for y = 1:16:size(im, 1)
         for x = 1:16:size(im, 2)
-            % initialise tile
+            % initialise empty tile
             itile = [];
             % construct an image tile
             for iy = 1:16
