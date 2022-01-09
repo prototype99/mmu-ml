@@ -35,7 +35,7 @@ function h = my_extractHOGFeatures(im)
             % collect gradients using the prewitt method
             [Gx, Gy] = my_imgradientxy(itile);
             % generate magnitudes and angles
-            [Gmag, Gdir] = imgradient(Gx, Gy);
+            [Gmag, Gdir] = my_imgradient(Gx, Gy);
             % prepare the axes, I want their edges extra sharp
             Gaxes = [0,0,0,0,0,0,0,0,0];
             % look at all 16 values
