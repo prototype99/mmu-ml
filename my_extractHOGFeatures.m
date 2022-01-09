@@ -57,12 +57,41 @@ function h = my_extractHOGFeatures(im)
             [Gx, Gy] = my_imgradientxy(itile);
             % generate magnitudes and angles
             [Gmag, Gdir] = imgradient(Gx, Gy);
+            % prepare the axes, I want their edges extra sharp
+            Gaxes = [0,0,0,0,0,0,0,0,0];
+            % look at all 16 values
+            for g = 1:16
+                % ignore empty magnitudes
+                if Gmag(g) ~= 0
+                    % see where this value fits on the histogram
+                    if Gdir(g) >= 140
+                        Gbin = 1;
+                    elseif Gdir(g) >= 100
+                        Gbin = 2;
+                    elseif Gdir(g) >= 60
+                        Gbin = 3;
+                    elseif Gdir(g) >= 20
+                        Gbin = 4;
+                    elseif Gdir(g) >= -20
+                        Gbin = 5;
+                    elseif Gdir(g) >= -60
+                        Gbin = 6;
+                    elseif Gdir(g) >= -100
+                        Gbin = 7;
+                    elseif Gdir(g) >= -140
+                        Gbin = 8;
+                    else
+                        Gbin = 9;
+                    end
+                    % add the magnitude
+                    Gaxes(Gbin) = Gaxes(Gbin) + Gmag(g);
+                end
+            end
         end
     end
-    % 40
     % normalise? unit l2 norm. normalise a whole block
     % sqrt( sum( h .^ 2 ) )
-    h = [];
+
     % One possible approach to computing histogram bin scores from
     % orientations (but you can use any approach you like as long as you
     % code it for yourself and don't just call another built-in function):
