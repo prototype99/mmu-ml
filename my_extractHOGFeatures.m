@@ -1,3 +1,5 @@
+% TODO: this is, umm... slower than the bundled version. At least the
+% performance is equal?
 % Description: given a greyscale image, extract HOG features from patches
 % of size 16*16 pixels using 9-bin histograms, and return all the bin
 % totals in a single large array
