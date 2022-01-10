@@ -91,25 +91,8 @@ function run_investigation(x,y)
                         % extract HOG data from every image
                         wordData(end+1,:) = get_feature(4, 1, data.read(), words);
                     end
-                    % prevent failure  condition
-                    if size(wordData,1) < 500
-                        % initialise variables
-                        b = 0;
-                        wordSize = 500;
-                        e = size(wordData,1) * size(wordData,2);
-                        % find an appropriate new number of rows
-                        while b == 0
-                            % it needs to be a clean division, there can't
-                            % be more rows than there are elements
-                            if mod(e,wordSize) ~= 0 && wordSize ~= e
-                                wordSize = wordSize + 1;
-                            else
-                                b = 1;
-                            end
-                        end
-                        % reshape the array to make it compatible
-                        wordData = reshape(wordData,wordSize,[]);
-                    end
+                    % reshape the array to make it compatible
+                    wordData = reshape(wordData,[],9);
                     samples = randi([1 size(wordData, 1)], 500, 1);
                     % use kmeans to extract words
                     [~, words] = kmeans(wordData, 500, 'Start', wordData(samples,:));
